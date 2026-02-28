@@ -23,7 +23,7 @@ def build_model(input_shape=(224, 224, 3), num_classes=15):
     )
     
     print(f"Model built: {model.count_params():,} total parameters")
-    print(f"  Trainable: {sum(p.numpy().size for p in model.trainable_weights):,}")
+    print(f"Trainable: {sum(p.numpy().size for p in model.trainable_weights):,}")
     return model
 
 

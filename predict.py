@@ -10,9 +10,10 @@ DEFAULT_CLASS_NAMES = [
     "Effusion", "Emphysema", "Fibrosis", "Hernia", "Infiltration",
     "Mass", "Nodule", "Pleural_Thickening", "Pneumonia", "Pneumothorax",
 ]
+NUM_PREDICTIONS = 5
 
 
-def predict_single(model_path, image_path, class_names=None, image_size=224, top_k=5):
+def predict_single(model_path, image_path, class_names=None, image_size=224):
     if class_names is None:
         class_names = DEFAULT_CLASS_NAMES
     
@@ -32,7 +33,7 @@ def predict_single(model_path, image_path, class_names=None, image_size=224, top
     print(f"{'Pathology':<25} {'Confidence':>10}")
     print("-" * 37)
     
-    for i in range(min(top_k, len(class_names))):
+    for i in range(NUM_PREDICTIONS):
         idx = sorted_indices[i]
         print(f"{class_names[idx]:<25} {predictions[idx]*100:>10.4f}%")
     
@@ -40,10 +41,9 @@ def predict_single(model_path, image_path, class_names=None, image_size=224, top
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Predict pathologies in a chest X-ray image.")
-    parser.add_argument("--image", type=str, required=True, help="Path to the X-ray image.")
-    parser.add_argument("--model", type=str, default="./output/best_model.keras", help="Path to the trained model.")
-    parser.add_argument("--top_k", type=int, default=5, help="Number of top predictions to display.")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--image", type=str, required=True)
+    parser.add_argument("--model", type=str, default="./output/best_model.keras")
     args = parser.parse_args()
     
-    predict_single(args.model, args.image, top_k=args.top_k)
+    predict_single(args.model, args.image)
