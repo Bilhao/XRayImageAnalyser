@@ -41,9 +41,3 @@ def parse_data():
     
     return train_df, val_df, test_df
 
-
-if __name__ == "__main__":
-    train_df, val_df, test_df = parse_data()
-    print(f"Training set size: {len(train_df)}")
-    print(f"Validation set size: {len(val_df)}")
-    print(f"Testing set size: {len(test_df)}")

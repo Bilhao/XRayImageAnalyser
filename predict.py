@@ -17,7 +17,6 @@ def predict_single(model_path, image_path, class_names=None, image_size=224):
     if class_names is None:
         class_names = DEFAULT_CLASS_NAMES
     
-    print(f"Loading model from {model_path}...")
     model = load_model(model_path)
     
     img = load_img(image_path, target_size=(image_size, image_size))
@@ -29,8 +28,8 @@ def predict_single(model_path, image_path, class_names=None, image_size=224):
     
     sorted_indices = np.argsort(predictions)[::-1]
     
-    print(f"\nPredictions for: {image_path}")
-    print(f"{'Pathology':<25} {'Confidence':>10}")
+    print(f"\nPredições para: {image_path}")
+    print(f"{'Patologia':<25} {'Confiança':>10}")
     print("-" * 37)
     
     for i in range(NUM_PREDICTIONS):

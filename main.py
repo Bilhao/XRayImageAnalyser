@@ -70,7 +70,7 @@ def main():
     for i, count in enumerate(class_counts):
         class_weights[i] = total_samples / (num_classes * (count if count > 0 else 1))
         
-    print("Computed Class Weights (boosting rare diseases):")
+    print("Pesos das classes:")
     for i, name in enumerate(class_names):
         print(f"  {name:<25}: {class_weights[i]:.2f}")
         

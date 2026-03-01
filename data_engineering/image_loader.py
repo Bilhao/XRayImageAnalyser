@@ -16,13 +16,6 @@ def find_image_path(image_name, base_dir="./data"):
 
 def build_path_column(df, base_dir="./data"):
     df['full_path'] = df['Image Index'].apply(lambda x: find_image_path(x, base_dir))
-    
-    missing = df['full_path'].isna().sum()
-    if missing > 0:
-        print(f"{missing} images not found on disk. Dropping these rows.")
-        df = df.dropna(subset=['full_path'])
-    
-    print(f"Images with valid paths: {len(df)}")
     return df
 
 
@@ -76,4 +69,4 @@ if __name__ == "__main__":
     test_df = build_path_column(test_df)
     
     num_classes = len(train_df['target_vector'].iloc[0])
-    print(f"Number of classes: {num_classes}")
+    print(f"Total de classes: {num_classes}")

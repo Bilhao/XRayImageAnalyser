@@ -13,17 +13,12 @@ def build_model(input_shape=(224, 224, 3), num_classes=15):
     x = Dropout(0.5)(x)
     
     output = Dense(num_classes, activation='sigmoid')(x)
-    
     model = Model(inputs=base_model.input, outputs=output)
-    
     model.compile(
         optimizer='adam',
         loss='binary_crossentropy',
         metrics=['binary_accuracy'],
     )
-    
-    print(f"Model built: {model.count_params():,} total parameters")
-    print(f"Trainable: {sum(p.numpy().size for p in model.trainable_weights):,}")
     return model
 
 

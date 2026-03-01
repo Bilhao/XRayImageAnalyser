@@ -7,7 +7,6 @@ from sklearn.metrics import roc_auc_score, roc_curve
 def evaluate(model, test_gen, class_names, output_dir="./output"):
     os.makedirs(output_dir, exist_ok=True)
     
-    print("Generating predictions on test set...")
     y_pred = model.predict(test_gen, verbose=1)
     
     y_true = []
@@ -18,7 +17,7 @@ def evaluate(model, test_gen, class_names, output_dir="./output"):
     
     y_true = y_true[:len(y_pred)]
     
-    print(f"\n{'Class':<25} {'AUC-ROC':>8}")
+    print(f"\n{'Classes':<25} {'AUC-ROC':>8}")
     print("-" * 35)
     
     auc_scores = {}
@@ -34,7 +33,7 @@ def evaluate(model, test_gen, class_names, output_dir="./output"):
     valid_aucs = [v for v in auc_scores.values() if not np.isnan(v)]
     mean_auc = np.mean(valid_aucs) if valid_aucs else 0.0
     print("-" * 35)
-    print(f"{'Mean AUC':<25} {mean_auc:>8.4f}")
+    print(f"{'Média dos AUC':<25} {mean_auc:>8.4f}")
     
     plot_rocs(y_true, y_pred, class_names, output_dir)
     
@@ -68,4 +67,3 @@ def plot_rocs(y_true, y_pred, class_names, output_dir="./output"):
     save_path = os.path.join(output_dir, "roc_curves.png")
     plt.savefig(save_path, dpi=150)
     plt.close()
-    print(f"ROC curves saved to {save_path}")

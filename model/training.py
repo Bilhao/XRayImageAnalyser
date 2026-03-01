@@ -28,7 +28,6 @@ def train(model, train_gen, val_gen, epochs=20, output_dir="./output", class_wei
         verbose=1,
     )
     
-    print(f"Starting training for {epochs} epochs...")
     history = model.fit(
         train_gen,
         validation_data=val_gen,
@@ -38,7 +37,6 @@ def train(model, train_gen, val_gen, epochs=20, output_dir="./output", class_wei
     )
     
     plot_history(history, output_dir)
-    
     return history
 
 
@@ -67,4 +65,3 @@ def plot_history(history, output_dir="./output"):
     save_path = os.path.join(output_dir, "training_history.png")
     plt.savefig(save_path, dpi=150)
     plt.close()
-    print(f"Training history plot saved to {save_path}")
